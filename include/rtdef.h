@@ -58,6 +58,7 @@ extern "C" {
                                          (RT_SUBVERSION * 100) + RT_REVISION)
 
 /* RT-Thread basic data type definitions */
+#ifndef RT_USING_ARCH_DATA_TYPE
 typedef signed   char                   rt_int8_t;      /**<  8bit integer type */
 typedef signed   short                  rt_int16_t;     /**< 16bit integer type */
 typedef signed   int                    rt_int32_t;     /**< 32bit integer type */
@@ -71,6 +72,7 @@ typedef unsigned long                   rt_uint64_t;    /**< 64bit unsigned inte
 #else
 typedef signed long long                rt_int64_t;     /**< 64bit integer type */
 typedef unsigned long long              rt_uint64_t;    /**< 64bit unsigned integer type */
+#endif
 #endif
 
 typedef int                             rt_bool_t;      /**< boolean type */
@@ -654,6 +656,7 @@ struct rt_semaphore
     struct rt_ipc_object parent;                        /**< inherit from ipc_object */
 
     rt_uint16_t          value;                         /**< value of semaphore. */
+    rt_uint16_t          reserved;                      /**< reserved field */
 };
 typedef struct rt_semaphore *rt_sem_t;
 #endif
@@ -846,6 +849,7 @@ enum rt_device_class_type
     RT_Device_Class_Portal,                             /**< Portal device */
     RT_Device_Class_Timer,                              /**< Timer device */
     RT_Device_Class_Miscellaneous,                      /**< Miscellaneous device */
+    RT_Device_Class_Sensor,                             /**< Sensor device */
     RT_Device_Class_Unknown                             /**< unknown device */
 };
 
@@ -1017,6 +1021,7 @@ enum
     RTGRAPHIC_PIXEL_FORMAT_ABGR888,
     RTGRAPHIC_PIXEL_FORMAT_ARGB565,
     RTGRAPHIC_PIXEL_FORMAT_ALPHA,
+    RTGRAPHIC_PIXEL_FORMAT_COLOR,
 };
 
 /**
